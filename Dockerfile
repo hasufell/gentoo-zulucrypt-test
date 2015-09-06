@@ -54,3 +54,12 @@ RUN chgrp paludisbuild /dev/tty && \
 
 # update etc files... hope this doesn't screw up
 RUN etc-update --automode -5
+
+# cleanup, only works if we flatten the image, see
+# https://labs.ctl.io/optimizing-docker-images/
+RUN rm -rf /usr/portage \
+	/var/cache/paludis \
+	/var/db/pkg/ \
+	/var/lib/portage/ \
+	/var/tmp/portage/ \
+	/var/tmp/paludis/
